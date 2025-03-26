@@ -48,7 +48,6 @@ python manage.py runserver
 
 ### Users
 - `POST /api/register/` - Register a new user
-- `GET /api/users/` - List all users (requires authentication)
 - `GET /api/users/{id}/` - Get user details (requires authentication)
 - `PUT /api/users/{id}/` - Update user (requires authentication)
 - `DELETE /api/users/{id}/` - Delete user (requires authentication)
@@ -122,7 +121,6 @@ The API uses JWT (JSON Web Token) authentication. To use the API:
 - id (auto-generated)
 - username
 - email
-- mobile
 - first_name
 - last_name
 - created_at
