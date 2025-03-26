@@ -16,7 +16,7 @@ A Django REST Framework-based API for managing tasks and assignments.
 1. Create a virtual environment:
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
 ```
 
 2. Install dependencies:
@@ -47,7 +47,7 @@ python manage.py runserver
 - `POST /api/token/refresh/` - Refresh JWT token
 
 ### Users
-- `POST /api/users/` - Register a new user
+- `POST /api/register/` - Register a new user
 - `GET /api/users/` - List all users (requires authentication)
 - `GET /api/users/{id}/` - Get user details (requires authentication)
 - `PUT /api/users/{id}/` - Update user (requires authentication)
@@ -66,7 +66,7 @@ python manage.py runserver
 
 ### Register a New User
 ```bash
-curl -X POST http://localhost:8000/api/users/ \
+curl -X POST http://localhost:8000/api/register/ \
   -H "Content-Type: application/json" \
   -d '{
     "username": "newuser",
@@ -111,7 +111,7 @@ curl http://localhost:8000/api/tasks/my_tasks/ \
 
 The API uses JWT (JSON Web Token) authentication. To use the API:
 
-1. Register a new user using the `/api/users/` endpoint
+1. Register a new user using the `/api/register/` endpoint
 2. Obtain a token by sending a POST request to `/api/token/` with your username and password
 3. Include the token in the Authorization header of subsequent requests
 4. Use the token refresh endpoint to get a new token when the current one expires

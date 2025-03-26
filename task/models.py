@@ -1,13 +1,14 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(AbstractUser):  # Extends default Django User
-    mobile = models.CharField(max_length=15, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class User(User, models.Model):  # Extends default Django User
+    """
+    Uses https://docs.djangoproject.com/en/3.2/topics/db/models/#proxy-models so that we can create a proxy model which
+    doesn't create a table but actually populates all the fields required by engine.Query
+    """
 
-    def __str__(self):
-        return self.username
+    class Meta:
+        proxy = True
 
 class Task(models.Model):
     STATUS_CHOICES = [

@@ -9,12 +9,17 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'mobile', 'first_name', 'last_name']
+        fields = ['id', 'username', 'email', 'password', 'first_name', 'last_name']
         extra_kwargs = {'password': {'write_only': True}}
-        read_only_fields = ('id')
+        read_only_fields = ('id',)
 
     def create(self, validated_data):
-        user = User.objects.get_or_create(**validated_data)
+        print(f"validated_data: {validated_data}")
+        password = validated_data.pop('password', None)
+        user = User.objects.create(**validated_data)
+        if password:
+            user.set_password(password)
+            user.save()
         return user
 
 class TaskSerializer(serializers.ModelSerializer):
